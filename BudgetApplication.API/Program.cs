@@ -1,3 +1,9 @@
+using BudgetApplication.API.Data;
+using BudgetApplication.API.Data.Services;
+using BudgetApplication.API.Data.Services.Contracts;
+using BudgetApplication.API.Services;
+using BudgetApplication.API.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 namespace BudgetApplication.API;
@@ -13,6 +19,15 @@ public class Program
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+
+        builder.Services.AddDbContext<DataContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+        
+        builder.Services.AddScoped<IBudgetService, BudgetService>();
+        builder.Services.AddScoped<IBudgetDataService, BudgetDataService>();
+        
 
         var app = builder.Build();
 
