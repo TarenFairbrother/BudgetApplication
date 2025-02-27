@@ -27,6 +27,8 @@ public class Program
         
         builder.Services.AddScoped<IBudgetService, BudgetService>();
         builder.Services.AddScoped<IBudgetDataService, BudgetDataService>();
+        builder.Services.AddScoped<ICategoryService, CategoryService>();
+        builder.Services.AddScoped<ICategoryDataService, CategoryDataService>();
         
 
         var app = builder.Build();

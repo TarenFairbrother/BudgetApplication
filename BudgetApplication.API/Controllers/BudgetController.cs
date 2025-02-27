@@ -1,6 +1,5 @@
 ﻿using BudgetApplication.API.Services.Contracts;
 using BudgetApplication.Shared.Entities;
-using BudgetApplication.Shared.Models;
 using BudgetApplication.Shared.Models.Budget;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +17,13 @@ public class BudgetController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Budget>>> GetAllBudgets()
+    public async Task<ActionResult<List<BudgetResponse>>> GetAllBudgets()
     {
         return Ok(await this.budgetService.GetAllBudgets());
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Budget>> GetBudget(Guid id)
+    public async Task<ActionResult<BudgetResponse>> GetBudget(Guid id)
     {
         var result = await this.budgetService.GetBudgetById(id);
 

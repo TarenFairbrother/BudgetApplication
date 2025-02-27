@@ -16,7 +16,9 @@ public class BudgetDataService : IBudgetDataService
 
     public async Task<List<Budget>> GetAllBudgets()
     {
-        return await context.Budgets.ToListAsync();
+        return await context.Budgets
+            .Include(budget => budget.Categories)
+            .ToListAsync();
     }
 
     public async Task<Budget?> GetBudgetById(Guid id)
